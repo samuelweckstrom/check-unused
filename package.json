@@ -1,0 +1,21 @@
+{
+  "name": "check-unused",
+  "description": "Check for unused dependencies",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "url": "https://github.com/samuelweckstrom/check-unused",
+  "license": "MIT",
+  "bin": {
+    "check-unused": "dist/index.js"
+  },
+  "scripts": {
+    "start": "tsc -w",
+    "build": "tsc -b",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.12",
+    "typescript": "^3.5.3"
+  }
+}
