@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "test-import-dependency": "*",
+    "test-require-dependency": "*",
+    "test-unused-dependency": "*"
+  }
+}
