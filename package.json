@@ -1,11 +1,23 @@
 {
   "name": "check-unused",
   "description": "Check for unused dependencies",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "url": "https://github.com/samuelweckstrom/check-unused",
   "license": "MIT",
+  "keywords": [
+    "NPM",
+    "check",
+    "unused",
+    "package",
+    "dependency",
+    "CLI"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/samuelweckstrom/check-unused"
+  },
   "bin": {
     "check-unused": "dist/index.js"
   },

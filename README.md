@@ -1,4 +1,4 @@
-# Check unused dependencies
+# Check unused dependencies 🔍
 
 CLI tool to check package.json and scan project directory for unused dependencies.
 
@@ -6,8 +6,20 @@ CLI tool to check package.json and scan project directory for unused dependencie
 
 Run tool in the same folder where `package.json` is located.
 
-Install globally: `npm i -g check-unused` \
-Run once with NPX: `npx check-unused`
+Install globally:
 
-Will by default recursively scan from current directory. Pass another location if you want to scan a specific folder, ie:\
-`npx check-unused ./src`
+```
+npm i -g check-unused
+```
+
+Or run once with NPX:
+
+```
+npx check-unused
+```
+
+Will by default recursively scan from current directory. Pass another location if you want to scan a specific folder, ie:
+
+```
+npx check-unused ./src
+```

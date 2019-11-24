@@ -11,7 +11,7 @@ const CONSOLE_FORMAT = {
   BOLD: '\x1b[1m',
 };
 
-async function getDependencies(path: string): Promise<string[] | any> {
+async function getDependencies(path: string): Promise<string[] | undefined> {
   let dependencies;
   await new Promise((resolve, reject) => {
     fs.readFile(path, (err: object, data: string) => {
@@ -59,12 +59,12 @@ async function checkUnusedDependency(dependencies: string[], pathArg: string = '
 }
 
 async function run() {
-  const jsonPath = path.resolve(process.cwd(), 'package.json')
-  const pathArg = process.argv[2];
+  const jsonPath: string = path.resolve(process.cwd(), 'package.json')
+  const pathArg: string = process.argv[2];
   try {
     let unusedDependencies: string[] | undefined = []
     const dependencies = await getDependencies(jsonPath);
-    if (dependencies.length) unusedDependencies = await checkUnusedDependency(dependencies, pathArg);
+    if (dependencies && dependencies.length) unusedDependencies = await checkUnusedDependency(dependencies, pathArg);
     if (unusedDependencies && unusedDependencies.length) {
       unusedDependencies.forEach(item =>
         console.log(
@@ -74,12 +74,12 @@ async function run() {
           item
         )
       );
-      return;
+    } else {
+      console.log(
+        `${CONSOLE_FORMAT.BOLD}${CONSOLE_FORMAT.GREEN}`,
+        'No unused dependencies!'
+      );
     }
-    console.log(
-      `${CONSOLE_FORMAT.BOLD}${CONSOLE_FORMAT.GREEN}`,
-      'No unused dependencies!'
-    );
   } catch (error) {
     console.log(`${CONSOLE_FORMAT.BOLD}${CONSOLE_FORMAT.RED}`, error.message);
   }
