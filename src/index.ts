@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-'use-strict'
 
 const fs = require('fs');
 const childProcess = require('child_process');
@@ -60,7 +59,7 @@ async function checkUnusedDependency(dependencies: string[], pathArg: string = '
 }
 
 async function run() {
-  const jsonPath = path.resolve(__dirname, '..', 'package.json')
+  const jsonPath = path.resolve(process.cwd(), 'package.json')
   const pathArg = process.argv[2];
   try {
     let unusedDependencies: string[] | undefined = []

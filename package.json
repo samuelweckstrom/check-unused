@@ -1,7 +1,7 @@
 {
   "name": "check-unused",
   "description": "Check for unused dependencies",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "url": "https://github.com/samuelweckstrom/check-unused",
@@ -11,8 +11,10 @@
   },
   "scripts": {
     "start": "tsc -w",
-    "build": "tsc -b",
-    "test": "jest"
+    "build": "tsc -b"
+  },
+  "dependencies": {
+    "lodash": "*"
   },
   "devDependencies": {
     "@types/node": "^12.12.12",
