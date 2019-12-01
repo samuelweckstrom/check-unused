@@ -3,3 +3,4 @@ tsconfig.json
 mock
 src/__tests__
 yarn-error.log
+.travis.yml
