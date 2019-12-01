@@ -1,5 +1,7 @@
 # Check unused dependencies 🔍
 
+[![Build Status](https://travis-ci.org/samuelweckstrom/check-unused.svg?branch=master)](https://travis-ci.org/samuelweckstrom/check-unused.svg?branch=master) [![TypeScript](https://badges.frapsoft.com/typescript/version/typescript-next.svg?v=101)](https://github.com/ellerbrock/typescript-badges/)
+
 CLI tool to check package.json and scan project directory for unused dependencies.
 
 ## Usage
