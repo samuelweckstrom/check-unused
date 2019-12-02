@@ -2,6 +2,7 @@
 
 import fs from 'fs'
 import childProcess from 'child_process'
+import readline from 'readline'
 import path from 'path'
 
 class Loader {
@@ -86,6 +87,7 @@ async function run() {
     let unusedDependencies: string[] | undefined = []
     const dependencies = await getDependencies(jsonPath);
     if (dependencies && dependencies.length) unusedDependencies = await checkUnusedDependency(dependencies, pathArg);
+    readline.clearLine(process.stdout, 0)
     if (unusedDependencies && unusedDependencies.length) {
       unusedDependencies.forEach(item =>
         process.stdout.write(
