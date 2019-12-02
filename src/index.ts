@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const fs = require('fs');
-const childProcess = require('child_process');
-const path = require('path')
+import fs from 'fs'
+import childProcess from 'child_process'
+import path from 'path'
 
 class Loader {
   constructor(text: string) {
@@ -33,15 +33,17 @@ const CONSOLE_FORMAT = {
   BOLD: '\x1b[1m',
 };
 
-async function getDependencies(path: string): Promise<string[] | undefined> {
+type Dependencies = { dependencies: string[] }
+
+async function getDependencies(jsonPath: string): Promise<string[] | void> {
   let dependencies;
   await new Promise((resolve, reject) => {
-    fs.readFile(path, (err: object, data: string) => {
+    fs.readFile(jsonPath, (err: NodeJS.ErrnoException | null, data: Buffer | any): void => {
       if (err) {
         reject(new Error('Could not find package.json in current folder!'));
         return;
       }
-      const parsed = JSON.parse(data);
+      const parsed: Dependencies = JSON.parse(data);
       dependencies = parsed.dependencies && Object.keys(parsed.dependencies);
       if (!dependencies) {
         reject(new Error('No dependencies defined in package.json!'));
@@ -53,24 +55,22 @@ async function getDependencies(path: string): Promise<string[] | undefined> {
   return dependencies;
 }
 
-type execError = { cmd: string }
-
 async function checkUnusedDependency(dependencies: string[], pathArg: string = '.') {
   if (!dependencies || !dependencies.length) return;
   const command = `grep '(loader|require|from).*${dependencies.length > 1 ? `(${dependencies.join('|')})` : dependencies}' -R -E --exclude-dir='node_modules' ${pathArg}`
   const unused: string[] = await new Promise((resolve, reject) => {
-    childProcess.exec(command, (err: execError, stdout: string, stderr: string) => {
+    childProcess.exec(command, { maxBuffer: 1024 * 500 }, (error: childProcess.ExecException | null, stdout: string | Buffer, stderr: string): void => {
       if (stderr.length) {
         reject(new Error('No such file or directory'));
         return;
       }
-      if (err) {
-        resolve(dependencies.filter(dep => err.cmd.includes(dep)));
-        return
+      if (error) {
+        resolve(dependencies.filter(dep => error.cmd && error.cmd.includes(dep)));
+        return;
       }
       if (stdout) {
         resolve(dependencies.filter(dep => !stdout.includes(dep)));
-        return
+        return;
       }
     });
   })
@@ -110,5 +110,6 @@ async function run() {
   loader.stop()
 }
 
+run()
+
 export { getDependencies, checkUnusedDependency }
-export default run()

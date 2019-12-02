@@ -34,7 +34,8 @@
   },
   "ava": {
     "files": [
-      "!**/*test.d.*"
+      "!**/*test.d.*",
+      "!dist"
     ],
     "compileEnhancements": false,
     "extensions": [

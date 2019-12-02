@@ -1,6 +1,6 @@
-const test = require('ava')
-const path = require('path')
-const { getDependencies, checkUnusedDependency } = require('../')
+import test from 'ava'
+import path from 'path'
+import { getDependencies, checkUnusedDependency } from '..'
 
 test('should return dependencies from passed .json file path', async (t: any) => {
   const jsonPath: string = path.resolve(__dirname, '../../mock/test.json')
