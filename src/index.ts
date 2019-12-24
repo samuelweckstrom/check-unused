@@ -58,7 +58,7 @@ async function getDependencies(jsonPath: string): Promise<string[] | void> {
 
 async function checkUnusedDependency(dependencies: string[], pathArg: string = '.') {
   if (!dependencies || !dependencies.length) return;
-  const command = `grep '(loader|require|from).*${dependencies.length > 1 ? `(${dependencies.join('|')})` : dependencies}' -R -E --exclude-dir='node_modules' ${pathArg}`
+  const command = `grep '(loader|require|from).*${dependencies.length > 1 ? `(${dependencies.join('|')})` : dependencies}' -R -E --exclude-dir={node_modules,.cache,dist} --exclude='*.log' ${pathArg}`
   const unused: string[] = await new Promise((resolve, reject) => {
     childProcess.exec(command, { maxBuffer: 1024 * 500 }, (error: childProcess.ExecException | null, stdout: string | Buffer, stderr: string): void => {
       if (stderr.length) {
