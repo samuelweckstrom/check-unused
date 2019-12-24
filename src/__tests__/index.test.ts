@@ -3,7 +3,7 @@ import path from 'path'
 import { getDependencies, checkUnusedDependency } from '..'
 
 test('should return dependencies from passed .json file path', async (t: any) => {
-  const jsonPath: string = path.resolve(__dirname, '../../mock/test.json')
+  const jsonPath: string = path.resolve(__dirname, '../../mock/package.json')
   const actual = await getDependencies(jsonPath);
   const expected = ['test-import-dependency', 'test-require-dependency', 'test-unused-dependency']
   t.deepEqual(actual, expected);
