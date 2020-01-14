@@ -1,6 +1,9 @@
 node_modules
 tsconfig.json
 mock
-src/__tests__
+package
+__tests__
+*.ts
+*.tgz
 yarn-error.log
 .travis.yml
